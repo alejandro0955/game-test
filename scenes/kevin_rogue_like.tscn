@@ -3216,11 +3216,6 @@ zoom = Vector2(2.785, 2.785)
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_egldo")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(-1.06692e-05, 0.99999)
-scale = Vector2(0.0847952, 0.0694981)
-texture = ExtResource("4_f16mi")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/AnimatedSprite2D"]
