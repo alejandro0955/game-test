@@ -1,15 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bfogfjsvdogrq"]
 
-[ext_resource type="PackedScene" uid="uid://bdgdwoh1vgjih" path="res://scenes/Player.tscn" id="1_jxeud"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_tm4he"]
+[ext_resource type="PackedScene" uid="uid://bdgdwoh1vgjih" path="res://scenes/player.tscn" id="1_jxeud"]
+[ext_resource type="Script" path="res://scenes/Main.cs" id="1_x375m"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(2, 7)
+script = ExtResource("1_x375m")
 
 [node name="Player" parent="." instance=ExtResource("1_jxeud")]
 position = Vector2(-2, -7)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(-2.3, 50)
-texture = SubResource("CanvasTexture_tm4he")
