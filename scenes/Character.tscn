@@ -1,8 +1,72 @@
-[gd_scene load_steps=20 format=3 uid="uid://dt2lktc8mtyd6"]
+[gd_scene load_steps=23 format=3 uid="uid://dt2lktc8mtyd6"]
 
 [ext_resource type="Texture2D" uid="uid://c62t27exko2gg" path="res://assets/satiro-Sheet v1.1.png" id="1_kp3qp"]
 [ext_resource type="Script" path="res://scripts/Character.cs" id="1_ku002"]
 [ext_resource type="Script" path="res://scripts/FSM.cs" id="2_62ehd"]
+
+[sub_resource type="Animation" id="Animation_5a0c8"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_dqaws"]
+resource_name = "walking"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walking"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dix3v"]
+_data = {
+"idle": SubResource("Animation_5a0c8"),
+"walking": SubResource("Animation_dqaws")
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ws1h"]
 radius = 8.0
@@ -87,7 +151,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -116,11 +180,16 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking",
-"speed": 10.0
+"speed": 5.0
 }]
 
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_ku002")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dix3v")
+}
 
 [node name="FiniteStateMachine" type="Node" parent="."]
 script = ExtResource("2_62ehd")
@@ -131,8 +200,6 @@ shape = SubResource("CapsuleShape2D_5ws1h")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5brti")
 animation = &"idle"
-frame = 4
-frame_progress = 0.387073
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)

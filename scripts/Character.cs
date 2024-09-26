@@ -23,7 +23,7 @@ public partial class Character : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         MoveAndSlide();
-        Velocity.Lerp(Vector2.Zero, FRICTION);
+        Velocity = Velocity.Lerp(Vector2.Zero, FRICTION);
     }
 
     public void move()

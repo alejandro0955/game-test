@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using Godot;
-using Godot.Collections;
 
 public partial class PlayerFSM : FSM
 {
@@ -15,18 +10,18 @@ public partial class PlayerFSM : FSM
 
     public override void _Ready()
     {
+        parent = GetParent<Character>();
+        AnimationPlayer = parent.GetNode<AnimationPlayer>("AnimationPlayer");
         SetState(States["idle"]);
-        var parent = GetParent<Character>();
     }
 
-    public new void StateLogic(double delta)
+    public override void StateLogic(double delta)
     {
         parent.Call("get_input");
         parent.Call("move");
-        GD.Print("tt");
     }
 
-    public new int GetTransition()
+    public override int GetTransition()
     {
         switch (State)
         {
@@ -46,5 +41,16 @@ public partial class PlayerFSM : FSM
         return -1;
     }
 
-    // public new void EnterState(int _PreviousState, int _NewState) { }
+    public override void EnterState(int _PreviousState, int _NewState)
+    {
+        switch (_NewState)
+        {
+            case 0:
+                AnimationPlayer.Play("idle");
+                break;
+            case 1:
+                AnimationPlayer.Play("walking");
+                break;
+        }
+    }
 }

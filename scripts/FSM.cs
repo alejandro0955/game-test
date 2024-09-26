@@ -1,6 +1,3 @@
-using System.ComponentModel;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
 using Godot;
 using Godot.Collections;
 
@@ -15,26 +12,25 @@ public partial class FSM : Node
     public override void _Ready()
     {
         parent = GetParent<Character>();
-        GD.Print("Test" + parent);
+        AnimationPlayer = parent.GetNode<AnimationPlayer>("AnimationPlayer");
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        GD.Print("test");
         if (State != -1)
         {
             StateLogic(delta);
             int transition = GetTransition();
-            if (transition != 1)
+            if (transition != -1)
             {
                 SetState(transition);
             }
         }
     }
 
-    public void StateLogic(double delta) { }
+    public virtual void StateLogic(double delta) { }
 
-    public int GetTransition()
+    public virtual int GetTransition()
     {
         return -1;
     }
@@ -42,6 +38,7 @@ public partial class FSM : Node
     public void AddState(string new_state)
     {
         States[new_state] = States.Count;
+        GD.Print(States);
     }
 
     public void SetState(int NewState)
@@ -52,7 +49,7 @@ public partial class FSM : Node
         EnterState(PreviousState, State);
     }
 
-    public void EnterState(int _PreviousState, int _NewState) { }
+    public virtual void EnterState(int _PreviousState, int _NewState) { }
 
-    public void ExitState(double delta) { }
+    public virtual void ExitState(int _StateExited) { }
 }

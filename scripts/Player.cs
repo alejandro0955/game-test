@@ -18,6 +18,7 @@ public partial class Player : Character
 
     public void get_input()
     {
+        mov_direction = Vector2.Zero;
         if (Input.IsActionPressed("ui_down"))
         {
             mov_direction += Vector2.Down;

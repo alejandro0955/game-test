@@ -12,8 +12,9 @@ position = Vector2(2, 7)
 
 [node name="Sample1" type="Sprite2D" parent="."]
 show_behind_parent = true
-position = Vector2(-205, -56)
+position = Vector2(-194, -52)
 texture = ExtResource("2_ymkt4")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(0, 1)
 tile_set = SubResource("TileSet_cto15")
