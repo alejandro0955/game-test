@@ -1,11 +1,23 @@
 using System;
+using System.ComponentModel;
 using Godot;
 
 public partial class Player : Character
 {
+    public Node2D Sword;
+
+    AnimationPlayer SwordAnimationPlayer;
+
+    public override void _Ready()
+    {
+        AnimatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        Sword = GetNode<Node2D>("Sword");
+        SwordAnimationPlayer = Sword.GetNode<AnimationPlayer>("SwordAnimationPlayer");
+    }
+
     public override void _Process(double delta)
     {
-        Vector2 mouse_direction = GetGlobalMousePosition() - GlobalPosition.Normalized();
+        Vector2 mouse_direction = (GetGlobalMousePosition() - GlobalPosition).Normalized();
         if (mouse_direction.X > 0)
         {
             AnimatedSprite.FlipH = false;
@@ -13,6 +25,19 @@ public partial class Player : Character
         else if (mouse_direction.X < 0 && !AnimatedSprite.FlipH)
         {
             AnimatedSprite.FlipH = true;
+        }
+        Sword.Rotation = mouse_direction.Angle();
+        if (Sword.Scale.Y == 1 && mouse_direction.X < 0)
+        {
+            Sword.Scale = new Vector2(Sword.Scale.X, -1);
+        }
+        else if (Sword.Scale.Y == -1 && mouse_direction.X > 0)
+        {
+            Sword.Scale = new Vector2(Sword.Scale.X, 1);
+        }
+        if (Input.IsActionJustPressed("ui_attack") && !SwordAnimationPlayer.IsPlaying())
+        {
+            SwordAnimationPlayer.Play("Attack");
         }
     }
 
