@@ -4,21 +4,21 @@ public partial class PlayerFSM : FSM
 {
     public PlayerFSM()
     {
-        AddState("idle");
-        AddState("move");
+        AddState("Idle");
+        AddState("Move");
     }
 
     public override void _Ready()
     {
         parent = GetParent<Character>();
         AnimationPlayer = parent.GetNode<AnimationPlayer>("AnimationPlayer");
-        SetState(States["idle"]);
+        SetState(States["Idle"]);
     }
 
     public override void StateLogic(double delta)
     {
         parent.Call("get_input");
-        parent.Call("move");
+        parent.Call("Move");
     }
 
     public override int GetTransition()
@@ -28,13 +28,13 @@ public partial class PlayerFSM : FSM
             case 0:
                 if (parent.Velocity.Length() > 10)
                 {
-                    return States["move"];
+                    return States["Move"];
                 }
                 break;
             case 1:
                 if (parent.Velocity.Length() < 10)
                 {
-                    return States["idle"];
+                    return States["Idle"];
                 }
                 break;
         }

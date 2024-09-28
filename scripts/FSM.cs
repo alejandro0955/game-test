@@ -12,6 +12,7 @@ public partial class FSM : Node
     public override void _Ready()
     {
         parent = GetParent<Character>();
+        GD.Print(parent);
         AnimationPlayer = parent.GetNode<AnimationPlayer>("AnimationPlayer");
     }
 
@@ -38,7 +39,6 @@ public partial class FSM : Node
     public void AddState(string new_state)
     {
         States[new_state] = States.Count;
-        GD.Print(States);
     }
 
     public void SetState(int NewState)

@@ -26,7 +26,7 @@ public partial class Character : CharacterBody2D
         Velocity = Velocity.Lerp(Vector2.Zero, FRICTION);
     }
 
-    public void move()
+    public void Move()
     {
         mov_direction = mov_direction.Normalized();
         Velocity += mov_direction * acceleration;
