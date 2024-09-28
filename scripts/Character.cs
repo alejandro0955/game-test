@@ -6,10 +6,10 @@ public partial class Character : CharacterBody2D
     float FRICTION = 0.15f;
 
     [Export]
-    int acceleration = 40;
+    int acceleration = 100;
 
     [Export]
-    int max_speed = 100;
+    int max_speed = 200;
 
     public AnimatedSprite2D AnimatedSprite;
 
