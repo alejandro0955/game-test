@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b8oakm7rrvtqy"]
+
+[node name="Room" type="Node2D"]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="NavigationAgent2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="NavigationAgent2D"]
+
+[node name="Entrance" type="Node2D" parent="."]

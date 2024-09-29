@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://byug5irs4u46u" path="res://assets/Run.png" id="2_qmg4k"]
 [ext_resource type="Script" path="res://scripts/CloseRangeEnemyFSM.cs" id="2_r2bhk"]
 [ext_resource type="Texture2D" uid="uid://cergap4e5griy" path="res://assets/Dead.png" id="3_l13ai"]
-[ext_resource type="Script" path="res://scripts/Hitbox.cs" id="6_mlhf6"]
+[ext_resource type="Script" path="res://scripts/Hitbox.cs" id="6_3eh2y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8gwe7"]
 atlas = ExtResource("3_l13ai")
@@ -91,10 +91,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jvcm0"]
-radius = 6.0208
+radius = 3.04138
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aa57q"]
-radius = 20.0998
+radius = 8.06226
 
 [sub_resource type="Animation" id="Animation_sj41d"]
 length = 0.001
@@ -305,11 +305,15 @@ _data = {
 
 [node name="CloseRangeEnemy" instance=ExtResource("1_ue2im")]
 script = ExtResource("2_q5hug")
+acceleration = 50
+max_speed = 100
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("2_r2bhk")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(-1.5, 3)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_1navc")
 animation = &"walk"
 
@@ -321,7 +325,7 @@ shape = SubResource("CircleShape2D_jvcm0")
 scale = Vector2(0.5, 0.5)
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("6_mlhf6")
+script = ExtResource("6_3eh2y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(-6, 11)

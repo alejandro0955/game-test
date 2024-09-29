@@ -2432,8 +2432,8 @@ position = Vector2(-72, 184)
 
 [node name="CloseRangeEnemy" parent="." instance=ExtResource("4_6c4bs")]
 position = Vector2(104, 16)
-acceleration = 50
-max_speed = 100
+collision_mask = 4
 
 [node name="CloseRangeEnemy2" parent="." instance=ExtResource("5_ogf4w")]
 position = Vector2(16, 160)
+collision_mask = 4

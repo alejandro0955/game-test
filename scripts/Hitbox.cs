@@ -9,7 +9,7 @@ public partial class Hitbox : Area2D
     Vector2 KnockBackDirection = Vector2.Zero;
 
     [Export]
-    public int KnockBackForce = 1000;
+    public int KnockBackForce = 300;
 
     public bool BodyInside = false;
     public Timer _timer;

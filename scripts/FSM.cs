@@ -37,7 +37,11 @@ public partial class FSM : Node
 
     public void AddState(string new_state)
     {
-        States[new_state] = States.Count;
+        if (!States.ContainsKey(new_state))
+        {
+            States[new_state] = States.Count;
+            GD.Print("Added ", new_state, " at ", States.Count);
+        }
     }
 
     public void SetState(int NewState)

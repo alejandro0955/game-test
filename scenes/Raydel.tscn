@@ -29,8 +29,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tcsp5"]
-radius = 4.5
-height = 38.0
+radius = 2.5
+height = 18.0
 
 [sub_resource type="Animation" id="Animation_sj41d"]
 length = 0.2
@@ -206,12 +206,14 @@ _data = {
 }
 
 [node name="CloseRangeEnemy" instance=ExtResource("1_fcp3s")]
+acceleration = 50
+max_speed = 100
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("2_d3j6h")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-scale = Vector2(0.045, 0.045)
+scale = Vector2(0.02, 0.02)
 sprite_frames = SubResource("SpriteFrames_1navc")
 animation = &"walk"
 frame = 1

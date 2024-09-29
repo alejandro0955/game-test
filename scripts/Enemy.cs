@@ -17,6 +17,7 @@ public partial class Enemy : Character
         Player = GetTree().CurrentScene.GetNode<CharacterBody2D>("Player");
         PathTimer = GetNode<Timer>("PathTimer");
         Navigation = GetNode<NavigationAgent2D>("NavigationAgent2D");
+        Connect("tree_exited", new Callable(this, "OnEnemyKilled"));
     }
 
     public void Chase()

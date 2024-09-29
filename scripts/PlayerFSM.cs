@@ -8,6 +8,7 @@ public partial class PlayerFSM : FSM
         AddState("Move");
         AddState("Hurt");
         AddState("Dead");
+        GD.Print("Player States", States);
     }
 
     public override void _Ready()
@@ -18,6 +19,7 @@ public partial class PlayerFSM : FSM
 
     public override void StateLogic(double delta)
     {
+        base.StateLogic(delta);
         if (State == States["Idle"] || State == States["Move"])
         {
             parent.Call("get_input");

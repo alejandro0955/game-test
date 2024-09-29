@@ -9,6 +9,7 @@ public partial class CloseRangeEnemyFSM : FSM
         AddState("Chase");
         AddState("Hurt");
         AddState("Dead");
+        GD.Print("tetet");
     }
 
     public override void _Ready()
@@ -19,6 +20,7 @@ public partial class CloseRangeEnemyFSM : FSM
 
     public override void StateLogic(double delta)
     {
+        base.StateLogic(delta);
         if (State == States["Chase"])
         {
             parent.Call("Chase");

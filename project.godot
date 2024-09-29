@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Rogue Like Game"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/Game.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SceneTransistor="*res://Autoloads/SceneTransistor.tscn"
+SavedData="*res://Autoloads/SavedData.gd"
 
 [display]
 
@@ -23,9 +28,13 @@ window/vsync/vsync_mode=0
 
 project/assembly_name="Rogue Like Game"
 
+[editor]
+
+version_control/autoload_on_startup=true
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GdScript2All-main/addons/gdscript2all/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

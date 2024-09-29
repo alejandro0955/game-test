@@ -3,12 +3,12 @@ using Godot;
 
 public partial class CloseRangeEnemy : Enemy
 {
-    public Hitbox Hitbox;
+    public Area2D Hitbox;
 
     public override void _Ready()
     {
         base._Ready();
-        Hitbox = GetNode<Hitbox>("Hitbox");
+        Hitbox = GetNode<Area2D>("Hitbox");
     }
 
     public override void _Process(double delta)
