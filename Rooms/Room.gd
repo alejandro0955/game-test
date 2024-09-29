@@ -24,7 +24,7 @@ func _ready() -> void:
 	num_enemies = enemy_positions_container.get_child_count()
 
 
-func OnEnemyKilled() -> void:
+func _on_enemy_killed() -> void:
 	num_enemies -= 1
 	if num_enemies == 0:
 		_open_doors()
