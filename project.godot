@@ -25,7 +25,7 @@ project/assembly_name="Rogue Like Game"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/GdScript2All-main/addons/gdscript2all/plugin.cfg")
 
 [input]
 

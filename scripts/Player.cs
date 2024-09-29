@@ -5,13 +5,14 @@ using Godot;
 public partial class Player : Character
 {
     public Node2D Sword;
-
-    AnimationPlayer SwordAnimationPlayer;
+    public Area2D SwordHitbox;
+    public AnimationPlayer SwordAnimationPlayer;
 
     public override void _Ready()
     {
         AnimatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         Sword = GetNode<Node2D>("Sword");
+        SwordHitbox = GetNode<Area2D>("Sword/Node2D/Sprite2D/Hitbox");
         SwordAnimationPlayer = Sword.GetNode<AnimationPlayer>("SwordAnimationPlayer");
     }
 
@@ -27,6 +28,7 @@ public partial class Player : Character
             AnimatedSprite.FlipH = true;
         }
         Sword.Rotation = mouse_direction.Angle();
+        SwordHitbox.KnockBackForce = mouse_direction;
         if (Sword.Scale.Y == 1 && mouse_direction.X < 0)
         {
             Sword.Scale = new Vector2(Sword.Scale.X, -1);

@@ -13,10 +13,10 @@ public partial class Enemy : Character
 
     public override void _Ready()
     {
-        Navigation = GetTree().CurrentScene.GetNode<NavigationAgent2D>("NavigationAgent2D");
         Player = GetTree().CurrentScene.GetNode<CharacterBody2D>("Player");
         PathTimer = GetNode<Timer>("PathTimer");
         AnimatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        Navigation = GetNode<NavigationAgent2D>("NavigationAgent2D");
     }
 
     public void Chase()
@@ -24,7 +24,14 @@ public partial class Enemy : Character
         if (!Navigation.IsTargetReached())
         {
             Vector2 VectorToNextPoint = Navigation.GetNextPathPosition() - GlobalPosition;
-            GD.Print(Navigation.GetNextPathPosition());
+
+            GD.Print(
+                "Next path position: ",
+                Navigation.GetNextPathPosition(),
+                " Target position: ",
+                Navigation.TargetPosition
+            );
+
             mov_direction = VectorToNextPoint;
 
             if (VectorToNextPoint.X > 0 && AnimatedSprite.FlipH)
@@ -46,6 +53,7 @@ public partial class Enemy : Character
         }
         else
         {
+            GD.Print("note ready");
             PathTimer.Stop();
             mov_direction = Vector2.Zero;
         }

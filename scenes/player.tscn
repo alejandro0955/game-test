@@ -1,9 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdgdwoh1vgjih"]
+[gd_scene load_steps=10 format=3 uid="uid://bdgdwoh1vgjih"]
 
 [ext_resource type="PackedScene" uid="uid://dt2lktc8mtyd6" path="res://scenes/Character.tscn" id="1_7yde3"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="2_64ufg"]
 [ext_resource type="Script" path="res://scripts/PlayerFSM.cs" id="3_we8tk"]
 [ext_resource type="Texture2D" uid="uid://xdi6u87fane8" path="res://assets/SnoopethDuckDuck Swords and Staffs/Pack 2/2px/34.png" id="4_irhjr"]
+[ext_resource type="Script" path="res://scripts/Hitbox.cs" id="5_wi8k5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qyt2c"]
+radius = 8.0
+height = 40.0
 
 [sub_resource type="Animation" id="Animation_dna1t"]
 resource_name = "Attack"
@@ -33,6 +38,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [-0.785398, 2.0944, 2.0944, -0.785398]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Sprite2D/Hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_045rw"]
 length = 0.001
@@ -47,6 +64,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [-0.785398]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Sprite2D/Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_of37g"]
@@ -74,6 +103,15 @@ rotation = -0.785398
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_irhjr")
 offset = Vector2(0, -16)
+
+[node name="Hitbox" type="Area2D" parent="Sword/Node2D/Sprite2D" index="0"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("5_wi8k5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/Node2D/Sprite2D/Hitbox" index="0"]
+position = Vector2(1.90735e-05, -16)
+shape = SubResource("CapsuleShape2D_qyt2c")
 
 [node name="SwordAnimationPlayer" type="AnimationPlayer" parent="Sword" index="1"]
 libraries = {
