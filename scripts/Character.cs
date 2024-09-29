@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 public partial class Character : CharacterBody2D
 {
@@ -40,7 +41,19 @@ public partial class Character : CharacterBody2D
     public void take_damage(int dam, Vector2 dir, int force)
     {
         hp -= dam;
-        // StateMachine.Call("Set_State", state["hurt"]);
-        Velocity += dir * force;
+        StateMachine = GetNode<Node>("FiniteStateMachine");
+        var States = StateMachine.Get("States");
+        Dictionary dict = States.AsGodotDictionary();
+        if (hp > 0)
+        {
+            GD.Print(States);
+            StateMachine.Call("SetState", dict["Hurt"]);
+            Velocity += dir * force;
+        }
+        else
+        {
+            StateMachine.Call("SetState", dict["Dead"]);
+            Velocity += dir * force * 2;
+        }
     }
 }

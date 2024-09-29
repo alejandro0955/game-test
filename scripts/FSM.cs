@@ -12,7 +12,6 @@ public partial class FSM : Node
     public override void _Ready()
     {
         parent = GetParent<Character>();
-        GD.Print(parent);
         AnimationPlayer = parent.GetNode<AnimationPlayer>("AnimationPlayer");
     }
 

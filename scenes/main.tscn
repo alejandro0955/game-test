@@ -2425,7 +2425,7 @@ tile_set = SubResource("TileSet_irxly")
 
 [node name="Camera2D" type="Camera2D" parent="TileMapLayer"]
 position = Vector2(41, 61)
-zoom = Vector2(1.2, 1.2)
+zoom = Vector2(1.94, 1.94)
 
 [node name="Player" parent="." instance=ExtResource("3_i5iy1")]
 position = Vector2(-72, 184)
@@ -2436,7 +2436,4 @@ acceleration = 50
 max_speed = 100
 
 [node name="CloseRangeEnemy2" parent="." instance=ExtResource("5_ogf4w")]
-position = Vector2(56, 176)
-scale = Vector2(0.5, 0.5)
-acceleration = 50
-max_speed = 100
+position = Vector2(16, 160)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Godot;
 
 public partial class CloseRangeEnemyFSM : FSM
@@ -6,12 +7,13 @@ public partial class CloseRangeEnemyFSM : FSM
     public CloseRangeEnemyFSM()
     {
         AddState("Chase");
+        AddState("Hurt");
+        AddState("Dead");
     }
 
     public override void _Ready()
     {
-        parent = GetParent<Character>();
-        AnimationPlayer = parent.GetNode<AnimationPlayer>("AnimationPlayer");
+        base._Ready();
         SetState(States["Chase"]);
     }
 
@@ -26,6 +28,15 @@ public partial class CloseRangeEnemyFSM : FSM
 
     public override int GetTransition()
     {
+        switch (State)
+        {
+            case 1:
+                if (!AnimationPlayer.IsPlaying())
+                {
+                    return 0;
+                }
+                break;
+        }
         return -1;
     }
 
@@ -35,6 +46,12 @@ public partial class CloseRangeEnemyFSM : FSM
         {
             case 0:
                 AnimationPlayer.Play("walk");
+                break;
+            case 1:
+                AnimationPlayer.Play("hurt");
+                break;
+            case 2:
+                AnimationPlayer.Play("dead");
                 break;
         }
     }

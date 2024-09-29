@@ -4,12 +4,12 @@ using Godot;
 public partial class Hitbox : Area2D
 {
     [Export]
-    int damage = 1;
+    public int damage = 1;
 
     Vector2 KnockBackDirection = Vector2.Zero;
 
     [Export]
-    int KnockBackForce = 300;
+    public int KnockBackForce = 1000;
 
     public bool BodyInside = false;
     public Timer _timer;
@@ -21,6 +21,7 @@ public partial class Hitbox : Area2D
         System.Diagnostics.Debug.Assert(CollisionShape != null);
         _timer.WaitTime = 1;
         AddChild(_timer);
+        GD.Print("this the one");
     }
 
     public Hitbox()
@@ -29,15 +30,18 @@ public partial class Hitbox : Area2D
         // Connect("body_entered", new Callable(this, "_on_body_exited"));
     }
 
-    public async void _on_body_entered(Node2D body)
+    public void OnBodyEntered(Node2D body)
     {
-        BodyInside = true;
-        _timer.Start();
-        while (BodyInside)
-        {
-            collide(body);
-            await ToSignal(_timer, "timeout");
-        }
+        // BodyInside = true;
+        // _timer.Start();
+        // while (BodyInside)
+        // {
+        //     collide(body);
+        //     await ToSignal(_timer, "timeout");
+        // }
+        GD.Print(KnockBackDirection);
+
+        body.Call("take_damage", damage, KnockBackDirection, KnockBackForce);
     }
 
     // public void _on_body_exited(Node2D body)
@@ -46,15 +50,15 @@ public partial class Hitbox : Area2D
     //     QueueFree();
     // }
 
-    public void collide(Node2D body)
-    {
-        if (body == null || !body.HasMethod("take_damage"))
-        {
-            QueueFree();
-        }
-        else
-        {
-            body.Call("take_damage", damage, KnockBackDirection, KnockBackForce);
-        }
-    }
+    // public void collide(Node2D body)
+    // {
+    //     if (body == null || !body.HasMethod("take_damage"))
+    //     {
+    //         QueueFree();
+    //     }
+    //     else
+    //     {
+    //         body.Call("take_damage", damage, KnockBackDirection, KnockBackForce);
+    //     }
+    // }
 }

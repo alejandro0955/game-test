@@ -13,9 +13,9 @@ public partial class Enemy : Character
 
     public override void _Ready()
     {
+        base._Ready();
         Player = GetTree().CurrentScene.GetNode<CharacterBody2D>("Player");
         PathTimer = GetNode<Timer>("PathTimer");
-        AnimatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         Navigation = GetNode<NavigationAgent2D>("NavigationAgent2D");
     }
 
@@ -24,13 +24,6 @@ public partial class Enemy : Character
         if (!Navigation.IsTargetReached())
         {
             Vector2 VectorToNextPoint = Navigation.GetNextPathPosition() - GlobalPosition;
-
-            GD.Print(
-                "Next path position: ",
-                Navigation.GetNextPathPosition(),
-                " Target position: ",
-                Navigation.TargetPosition
-            );
 
             mov_direction = VectorToNextPoint;
 
@@ -53,7 +46,6 @@ public partial class Enemy : Character
         }
         else
         {
-            GD.Print("note ready");
             PathTimer.Stop();
             mov_direction = Vector2.Zero;
         }
@@ -61,6 +53,9 @@ public partial class Enemy : Character
 
     public void GetPathToPlayer()
     {
-        Navigation.TargetPosition = Player.Position;
+        if (IsInstanceValid(Player))
+        {
+            Navigation.TargetPosition = Player.Position;
+        }
     }
 }

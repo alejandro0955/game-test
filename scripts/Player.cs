@@ -10,7 +10,7 @@ public partial class Player : Character
 
     public override void _Ready()
     {
-        AnimatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        base._Ready();
         Sword = GetNode<Node2D>("Sword");
         SwordHitbox = GetNode<Area2D>("Sword/Node2D/Sprite2D/Hitbox");
         SwordAnimationPlayer = Sword.GetNode<AnimationPlayer>("SwordAnimationPlayer");
@@ -28,7 +28,7 @@ public partial class Player : Character
             AnimatedSprite.FlipH = true;
         }
         Sword.Rotation = mouse_direction.Angle();
-        SwordHitbox.KnockBackForce = mouse_direction;
+        SwordHitbox.Set("KnockBackDirection", mouse_direction);
         if (Sword.Scale.Y == 1 && mouse_direction.X < 0)
         {
             Sword.Scale = new Vector2(Sword.Scale.X, -1);
@@ -36,10 +36,6 @@ public partial class Player : Character
         else if (Sword.Scale.Y == -1 && mouse_direction.X > 0)
         {
             Sword.Scale = new Vector2(Sword.Scale.X, 1);
-        }
-        if (Input.IsActionJustPressed("ui_attack") && !SwordAnimationPlayer.IsPlaying())
-        {
-            SwordAnimationPlayer.Play("Attack");
         }
     }
 
@@ -61,6 +57,10 @@ public partial class Player : Character
         if (Input.IsActionPressed("ui_right"))
         {
             mov_direction += Vector2.Right;
+        }
+        if (Input.IsActionJustPressed("ui_attack") && !SwordAnimationPlayer.IsPlaying())
+        {
+            SwordAnimationPlayer.Play("Attack");
         }
     }
 }
